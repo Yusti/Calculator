@@ -1,17 +1,16 @@
-
-import { StyleSheet } from 'react-native'
+import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-    icon: {
-        backgroundColor: 'rgb(219, 250, 247)',
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: 5,
-        overflow: 'hidden',
-    },
-    colorBlue: {
-        color: 'rgb(92, 198, 182)',
-    }
-})
+  icon: {
+    backgroundColor: '#dbfaf7',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 5,
+    overflow: 'hidden',
+  },
+  colorBlue: {
+    color: '#5cc6b6',
+  },
+});
 
-export default styles
+export default styles;

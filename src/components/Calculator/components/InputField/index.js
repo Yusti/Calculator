@@ -6,7 +6,7 @@ import { TextInput } from 'react-native';
 import styles from './styles';
 
 export default function InputField({ inputValue }) {
-  return (<TextInput style={styles.input} value={inputValue} />);
+  return (<TextInput style={styles.input} value={inputValue} underlineColorAndroid="transparent" />);
 }
 
 InputField.propTypes = {

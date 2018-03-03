@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { View, Text, TouchableOpacity } from 'react-native';
 
@@ -37,7 +38,7 @@ export default class Calculator extends React.Component {
       default:
         result = value;
     }
-    result = Number(parseFloat(result).toPrecision(7))
+    result = Number(parseFloat(result).toPrecision(7));
     this.setState({
       result,
       input: result.toString(),
@@ -60,7 +61,7 @@ export default class Calculator extends React.Component {
       });
     } else if (this.state.input === '0' && input !== '.') {
       this.setState({ input });
-    } else if (input !== '.' || this.state.input.indexOf('.') === -1 ) {
+    } else if (input !== '.' || this.state.input.indexOf('.') === -1) {
       this.setState({ input: this.state.input + input });
     }
   }
@@ -87,7 +88,7 @@ export default class Calculator extends React.Component {
       <View style={styles.wrapper}>
         <View style={{ flex: 7, justifyContent: 'center' }}>
           <InputField inputValue={this.state.input} />
-          <View style={{ flexDirection: 'row' }}>
+          <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
             <View style={{ flex: 3 }}>
               <View style={[styles.grid, { flexDirection: 'row-reverse' }]}>{numbers}</View>
             </View>
@@ -134,3 +135,7 @@ export default class Calculator extends React.Component {
     );
   }
 }
+
+Calculator.propTypes = {
+  onPress: PropTypes.func.isRequired,
+};

@@ -20,6 +20,7 @@ export default function CalculatorButton({
 
 CalculatorButton.propTypes = {
   onPress: PropTypes.func.isRequired,
+  // eslint-disable-next-line react/no-typos
   style: ViewPropTypes.style,
   title: PropTypes.oneOfType([
     PropTypes.string,
