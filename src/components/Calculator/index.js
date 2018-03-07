@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { View, Text, TouchableOpacity } from 'react-native';
 
-import CalculatorButton from './components/CalculatorButton';
+import ButtonsGroup from './components/ButtonsGroup';
 import InputField from './components/InputField';
 
 import styles from './styles';
@@ -75,56 +75,15 @@ export default class Calculator extends React.Component {
   }
 
   render() {
-    const numbers = [];
-    for (let i = 9; i > 0; i -= 1) {
-      numbers.push(<CalculatorButton
-        key={i}
-        title={i}
-        onPress={() => this.changeInput(i.toString())}
-      />);
-    }
-
     return (
       <View style={styles.wrapper}>
         <View style={{ flex: 7, justifyContent: 'center' }}>
           <InputField inputValue={this.state.input} />
-          <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-            <View style={{ flex: 3 }}>
-              <View style={[styles.grid, { flexDirection: 'row-reverse' }]}>{numbers}</View>
-            </View>
-            <View style={{ flex: 1 }}>
-              <CalculatorButton title="/" theme="operation" onPress={() => this.changeOperation('/')} />
-              <CalculatorButton title="*" theme="operation" onPress={() => this.changeOperation('*')} />
-              <CalculatorButton title="-" theme="operation" onPress={() => this.changeOperation('-')} />
-            </View>
-          </View>
-          <View style={{ flexDirection: 'row' }}>
-            <View style={{ flex: 3 }}>
-              <View style={[styles.grid, { flexDirection: 'row' }]}>
-                <View style={{ flexDirection: 'row' }}>
-                  <CalculatorButton title="0" style={{ width: 100 }} onPress={() => this.changeInput('0')} />
-                  <CalculatorButton title="." onPress={() => this.changeInput('.')} />
-                </View>
-                <View style={{ flexDirection: 'row' }}>
-                  <CalculatorButton title="Del" theme="dangerOperation" onPress={() => this.deleteInput()} />
-                  <CalculatorButton
-                    title="="
-                    theme="operation"
-                    style={{ width: 100 }}
-                    onPress={() => this.changeOperation('=')}
-                  />
-                </View>
-              </View>
-            </View>
-            <View style={{ flex: 1 }}>
-              <CalculatorButton
-                title="+"
-                theme="operation"
-                style={{ flex: 1 }}
-                onPress={() => this.changeOperation('+')}
-              />
-            </View>
-          </View>
+          <ButtonsGroup
+            changeOperation={this.changeOperation}
+            changeInput={this.changeInput}
+            deleteInput={this.deleteInput}
+          />
         </View>
         <View style={{ flex: 1 }}>
           <TouchableOpacity onPress={this.props.onPress}>

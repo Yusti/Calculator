@@ -10,11 +10,6 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
   },
-  grid: {
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
 });
 
 export default styles;
