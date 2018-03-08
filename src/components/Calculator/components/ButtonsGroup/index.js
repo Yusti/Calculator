@@ -32,12 +32,12 @@ export default function ButtonsGroup({
         <View style={{ flex: 3 }}>
           <View style={[styles.grid, { flexDirection: 'row' }]}>
             <View style={{ flexDirection: 'row' }}>
-              <CalculatorButton title="0" style={{ width: 100 }} onPress={() => changeInput('0')} />
+              <CalculatorButton title="0" style={{ width: 120 }} onPress={() => changeInput('0')} />
               <CalculatorButton title="." onPress={() => changeInput('.')} />
             </View>
             <View style={{ flexDirection: 'row' }}>
               <CalculatorButton title="Del" theme="dangerOperation" onPress={() => deleteInput()} />
-              <CalculatorButton title="=" theme="operation" style={{ width: 100 }} onPress={() => changeOperation('=')} />
+              <CalculatorButton title="=" theme="operation" style={{ width: 120 }} onPress={() => changeOperation('=')} />
             </View>
           </View>
         </View>

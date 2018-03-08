@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { View, Text, TouchableOpacity } from 'react-native';
+import { ScrollView, View, Text, TouchableOpacity } from 'react-native';
 
 import ButtonsGroup from './components/ButtonsGroup';
 import InputField from './components/InputField';
@@ -77,19 +77,17 @@ export default class Calculator extends React.Component {
   render() {
     return (
       <View style={styles.wrapper}>
-        <View style={{ flex: 7, justifyContent: 'center' }}>
+        <ScrollView contentContainerStyle={{ height: 500, justifyContent: 'center', width: 260 }}>
           <InputField inputValue={this.state.input} />
           <ButtonsGroup
             changeOperation={this.changeOperation}
             changeInput={this.changeInput}
             deleteInput={this.deleteInput}
           />
-        </View>
-        <View style={{ flex: 1 }}>
-          <TouchableOpacity onPress={this.props.onPress}>
+          <TouchableOpacity onPress={this.props.onPress} style={{ marginTop: 40 }}>
             <Text style={{ textAlign: 'right', color: '#e54856' }}>Exit</Text>
           </TouchableOpacity>
-        </View>
+        </ScrollView>
       </View>
     );
   }
