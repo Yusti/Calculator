@@ -18,31 +18,31 @@ export default function ButtonsGroup({
   }
   return (
     <View>
-      <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-        <View style={{ flex: 3 }}>
-          <View style={[styles.grid, { flexDirection: 'row-reverse' }]}>{numbers}</View>
+      <View style={[styles.flexRow, styles.justCenter]}>
+        <View style={styles.flex3}>
+          <View style={[styles.grid, styles.flexRowReverse]}>{numbers}</View>
         </View>
-        <View style={{ flex: 1 }}>
+        <View style={styles.flex1}>
           <CalculatorButton title="/" theme="operation" onPress={() => changeOperation('/')} />
           <CalculatorButton title="*" theme="operation" onPress={() => changeOperation('*')} />
           <CalculatorButton title="-" theme="operation" onPress={() => changeOperation('-')} />
         </View>
       </View>
-      <View style={{ flexDirection: 'row' }}>
-        <View style={{ flex: 3 }}>
-          <View style={[styles.grid, { flexDirection: 'row' }]}>
-            <View style={{ flexDirection: 'row' }}>
-              <CalculatorButton title="0" style={{ width: 120 }} onPress={() => changeInput('0')} />
+      <View style={styles.flexRow}>
+        <View style={styles.flex3}>
+          <View style={[styles.grid, styles.flexRow]}>
+            <View style={styles.flexRow}>
+              <CalculatorButton title="0" style={styles.btnLg} onPress={() => changeInput('0')} />
               <CalculatorButton title="." onPress={() => changeInput('.')} />
             </View>
-            <View style={{ flexDirection: 'row' }}>
+            <View style={styles.flexRow}>
               <CalculatorButton title="Del" theme="dangerOperation" onPress={() => deleteInput()} />
-              <CalculatorButton title="=" theme="operation" style={{ width: 120 }} onPress={() => changeOperation('=')} />
+              <CalculatorButton title="=" theme="operation" style={styles.btnLg} onPress={() => changeOperation('=')} />
             </View>
           </View>
         </View>
-        <View style={{ flex: 1 }}>
-          <CalculatorButton title="+" theme="operation" style={{ flex: 1 }} onPress={() => changeOperation('+')} />
+        <View style={styles.flex1}>
+          <CalculatorButton title="+" theme="operation" style={styles.flex1} onPress={() => changeOperation('+')} />
         </View>
       </View>
     </View>

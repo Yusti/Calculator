@@ -9,20 +9,10 @@ import InputField from './components/InputField';
 import styles from './styles';
 
 export default class Calculator extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      input: '0',
-      newInputExpected: false,
-      operation: '',
-      result: 0,
-    };
-  }
-
   setResult = () => {
-    let { result } = this.state;
-    const value = Number(this.state.input);
-    switch (this.state.operation) {
+    let { result } = this.props;
+    const value = Number(this.props.input);
+    switch (this.props.operation) {
       case '+':
         result += value;
         break;
@@ -39,53 +29,49 @@ export default class Calculator extends React.Component {
         result = value;
     }
     result = Number(parseFloat(result).toPrecision(7));
-    this.setState({
-      result,
-      input: result.toString(),
-      newInputExpected: true,
-    });
+    this.props.setInput(result.toString());
+    this.props.setNewInputExpected(true);
+    this.props.setResult(result);
   }
 
   changeOperation = (operation) => {
-    if (!this.state.newInputExpected) {
+    if (!this.props.newInputExpected) {
       this.setResult();
     }
-    this.setState({ operation });
+    this.props.setOperation(operation);
   }
 
   changeInput = (input) => {
-    if (this.state.newInputExpected) {
-      this.setState({
-        input,
-        newInputExpected: false,
-      });
-    } else if (this.state.input === '0' && input !== '.') {
-      this.setState({ input });
-    } else if (input !== '.' || this.state.input.indexOf('.') === -1) {
-      this.setState({ input: this.state.input + input });
+    let inputResult;
+    if (this.props.newInputExpected || (this.props.input === '0' && input !== '.')) {
+      inputResult = input;
+    } else if (input !== '.' || this.props.input.indexOf('.') === -1) {
+      inputResult = this.props.input + input;
     }
+    this.props.setInput(inputResult);
+    this.props.setNewInputExpected(false);
   }
 
   deleteInput = () => {
-    this.setState({
-      input: '0',
-      result: 0,
-      newInputExpected: true,
-    });
+    this.props.setInput('0');
+    this.props.setNewInputExpected(true);
+    this.props.setOperation('');
+    this.props.setResult(0);
   }
 
   render() {
+    const { input, onExit } = this.props;
     return (
       <View style={styles.wrapper}>
-        <ScrollView contentContainerStyle={{ height: 500, justifyContent: 'center', width: 260 }}>
-          <InputField inputValue={this.state.input} />
+        <ScrollView contentContainerStyle={styles.scrollContainer}>
+          <InputField inputValue={input} />
           <ButtonsGroup
             changeOperation={this.changeOperation}
             changeInput={this.changeInput}
             deleteInput={this.deleteInput}
           />
-          <TouchableOpacity onPress={this.props.onPress} style={{ marginTop: 40 }}>
-            <Text style={{ textAlign: 'right', color: '#e54856' }}>Exit</Text>
+          <TouchableOpacity onPress={onExit} style={styles.marginTopLg}>
+            <Text style={styles.exitCopy}>Exit</Text>
           </TouchableOpacity>
         </ScrollView>
       </View>
@@ -94,5 +80,13 @@ export default class Calculator extends React.Component {
 }
 
 Calculator.propTypes = {
-  onPress: PropTypes.func.isRequired,
+  onExit: PropTypes.func.isRequired,
+  input: PropTypes.string.isRequired,
+  newInputExpected: PropTypes.bool.isRequired,
+  operation: PropTypes.string.isRequired,
+  result: PropTypes.number.isRequired,
+  setInput: PropTypes.func.isRequired,
+  setNewInputExpected: PropTypes.func.isRequired,
+  setOperation: PropTypes.func.isRequired,
+  setResult: PropTypes.func.isRequired,
 };

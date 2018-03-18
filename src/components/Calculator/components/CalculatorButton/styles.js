@@ -22,6 +22,10 @@ const styles = StyleSheet.create({
   text: {
     fontWeight: 'bold',
     fontSize: 16,
+    color: '#fff',
+  },
+  aqua: {
+    color: '#5cc6b6',
   },
 });
 

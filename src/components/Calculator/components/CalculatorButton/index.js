@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Text, TouchableOpacity, ViewPropTypes } from 'react-native';
+import { Text, TouchableOpacity } from 'react-native';
 
 import styles from './styles';
 
@@ -13,15 +13,15 @@ export default function CalculatorButton({
 }) {
   return (
     <TouchableOpacity style={[styles.button, style, theme && styles[theme]]} onPress={onPress}>
-      <Text style={[styles.text, { color: theme === 'number' ? '#5cc6b6' : 'white' }]}>{title}</Text>
+      <Text style={[styles.text, theme === 'number' && styles.aqua]}>{title}</Text>
     </TouchableOpacity>
   );
 }
 
 CalculatorButton.propTypes = {
   onPress: PropTypes.func.isRequired,
-  // eslint-disable-next-line react/no-typos
-  style: ViewPropTypes.style,
+  // eslint-disable-next-line react/forbid-prop-types
+  style: PropTypes.any,
   title: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
