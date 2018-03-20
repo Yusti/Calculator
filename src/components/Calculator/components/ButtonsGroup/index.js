@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import { View } from 'react-native';
 
@@ -7,11 +6,17 @@ import CalculatorButton from '../CalculatorButton';
 
 import styles from './styles';
 
+type Props = {
+  changeOperation: Function,
+  changeInput: Function,
+  deleteInput: Function,
+}
+
 export default function ButtonsGroup({
   changeOperation,
   changeInput,
   deleteInput,
-}) {
+}: Props) {
   const numbers = [];
   for (let i = 9; i > 0; i -= 1) {
     numbers.push(<CalculatorButton key={i} title={i} onPress={() => changeInput(i.toString())} />);
@@ -48,9 +53,3 @@ export default function ButtonsGroup({
     </View>
   );
 }
-
-ButtonsGroup.propTypes = {
-  changeOperation: PropTypes.func.isRequired,
-  changeInput: PropTypes.func.isRequired,
-  deleteInput: PropTypes.func.isRequired,
-};

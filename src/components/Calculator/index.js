@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 
 import { ScrollView, View, Text, TouchableOpacity } from 'react-native';
 
@@ -8,7 +7,19 @@ import InputField from './components/InputField';
 
 import styles from './styles';
 
-export default class Calculator extends React.Component {
+type Props = {
+  onExit: Function,
+  input: string,
+  newInputExpected: boolean,
+  operation: string,
+  result: number,
+  setInput: Function,
+  setNewInputExpected: Function,
+  setOperation: Function,
+  setResult: Function,
+};
+
+export default class Calculator extends Component {
   setResult = () => {
     let { result } = this.props;
     const value = Number(this.props.input);
@@ -59,6 +70,8 @@ export default class Calculator extends React.Component {
     this.props.setResult(0);
   }
 
+  props: Props;
+
   render() {
     const { input, onExit } = this.props;
     return (
@@ -78,15 +91,3 @@ export default class Calculator extends React.Component {
     );
   }
 }
-
-Calculator.propTypes = {
-  onExit: PropTypes.func.isRequired,
-  input: PropTypes.string.isRequired,
-  newInputExpected: PropTypes.bool.isRequired,
-  operation: PropTypes.string.isRequired,
-  result: PropTypes.number.isRequired,
-  setInput: PropTypes.func.isRequired,
-  setNewInputExpected: PropTypes.func.isRequired,
-  setOperation: PropTypes.func.isRequired,
-  setResult: PropTypes.func.isRequired,
-};

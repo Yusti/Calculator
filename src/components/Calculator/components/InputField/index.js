@@ -1,14 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import { TextInput } from 'react-native';
 
 import styles from './styles';
 
-export default function InputField({ inputValue }) {
+type Props = {
+  inputValue: string,
+};
+
+export default function InputField({ inputValue }: Props) {
   return (<TextInput style={styles.input} value={inputValue} underlineColorAndroid="transparent" />);
 }
-
-InputField.propTypes = {
-  inputValue: PropTypes.string.isRequired,
-};

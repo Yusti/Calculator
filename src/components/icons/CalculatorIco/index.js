@@ -1,12 +1,15 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import { View, Text, TouchableOpacity } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 
 import styles from './styles';
 
-export default function CalculatorIco({ onPress }) {
+type Props = {
+  onPress: Function,
+};
+
+export default function CalculatorIco({ onPress }: Props) {
   return (
     <View style={styles.icon} width={100} height={100}>
       <TouchableOpacity onPress={onPress}>
@@ -20,7 +23,3 @@ export default function CalculatorIco({ onPress }) {
     </View>
   );
 }
-
-CalculatorIco.propTypes = {
-  onPress: PropTypes.func.isRequired,
-};

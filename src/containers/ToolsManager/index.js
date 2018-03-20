@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 import { View } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -10,29 +9,33 @@ import Calculator from '../../containers/Calculator';
 
 import styles from './styles';
 
-// eslint-disable-next-line react/prefer-stateless-function
-class ToolsManager extends Component {
-  render() {
-    return (
-      <View style={styles.wrapper}>
-        <CalculatorIco onPress={this.props.toolsManagerActions.openCalculator} />
-        {this.props.activeTools.calculator && (
-          <Calculator onExit={this.props.toolsManagerActions.closeCalculator} />
-        )}
-      </View>
-    );
-  }
-}
-
-ToolsManager.propTypes = {
-  activeTools: PropTypes.shape({
-    calculator: PropTypes.bool.isRequired,
-  }).isRequired,
-  toolsManagerActions: PropTypes.shape({
-    openCalculator: PropTypes.func.isRequired,
-    closeCalculator: PropTypes.func.isRequired,
-  }).isRequired,
+type isActive = {
+  calculator: boolean,
 };
+
+type Actions = {
+  openCalculator: Function,
+  closeCalculator: Function,
+};
+
+type Props = {
+  activeTools: isActive,
+  actions: Actions,
+};
+
+function ToolsManager({
+  activeTools,
+  actions,
+}: Props) {
+  return (
+    <View style={styles.wrapper}>
+      <CalculatorIco onPress={actions.openCalculator} />
+      {activeTools.calculator && (
+        <Calculator onExit={actions.closeCalculator} />
+      )}
+    </View>
+  );
+}
 
 function mapStateToProps(state) {
   return {
@@ -42,7 +45,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    toolsManagerActions: bindActionCreators(toolsManagerActions, dispatch),
+    actions: bindActionCreators(toolsManagerActions, dispatch),
   };
 }
 
