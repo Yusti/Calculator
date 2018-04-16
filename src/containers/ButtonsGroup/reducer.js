@@ -1,3 +1,10 @@
+import {
+  SET_INPUT,
+  SET_NEW_INPUT_EXPECTED,
+  SET_OPERATION,
+  SET_RESULT,
+} from './constants';
+
 const initialState = {
   input: '0',
   newInputExpected: true,
@@ -7,22 +14,22 @@ const initialState = {
 
 export default function calculatorState(state = initialState, action) {
   switch (action.type) {
-    case 'SET_INPUT':
+    case SET_INPUT:
       return {
         ...state,
         input: action.payload,
       };
-    case 'SET_NEW_INPUT_EXPECTED':
+    case SET_NEW_INPUT_EXPECTED:
       return {
         ...state,
         newInputExpected: action.payload,
       };
-    case 'SET_OPERATION':
+    case SET_OPERATION:
       return {
         ...state,
         operation: action.payload,
       };
-    case 'SET_RESULT':
+    case SET_RESULT:
       return {
         ...state,
         result: action.payload,

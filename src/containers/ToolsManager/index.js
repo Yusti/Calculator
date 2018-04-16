@@ -2,16 +2,15 @@ import React from 'react';
 import { View } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as toolsManagerActions from '../../actions/ToolsManagerActions';
+import { createStructuredSelector } from 'reselect';
+
+import * as toolsManagerActions from './actions';
+import { selectIsCalculatorActive } from './selectors';
 
 import CalculatorIco from '../../components/icons/CalculatorIco';
 import Calculator from '../../containers/Calculator';
 
 import styles from './styles';
-
-type isActive = {
-  calculator: boolean,
-};
 
 type Actions = {
   openCalculator: Function,
@@ -19,29 +18,27 @@ type Actions = {
 };
 
 type Props = {
-  activeTools: isActive,
   actions: Actions,
+  calculator: boolean,
 };
 
 function ToolsManager({
-  activeTools,
+  calculator,
   actions,
 }: Props) {
   return (
     <View style={styles.wrapper}>
       <CalculatorIco onPress={actions.openCalculator} />
-      {activeTools.calculator && (
+      {calculator && (
         <Calculator onExit={actions.closeCalculator} />
       )}
     </View>
   );
 }
 
-function mapStateToProps(state) {
-  return {
-    activeTools: state.activeTools,
-  };
-}
+const mapStateToProps = createStructuredSelector({
+  calculator: selectIsCalculatorActive(),
+});
 
 function mapDispatchToProps(dispatch) {
   return {
