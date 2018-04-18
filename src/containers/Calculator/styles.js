@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   wrapper: {
-    padding: 30,
+    padding: 20,
     paddingTop: 40,
     backgroundColor: 'white',
     position: 'absolute',
@@ -15,7 +15,6 @@ const styles = StyleSheet.create({
   scrollContainer: {
     height: 500,
     justifyContent: 'center',
-    width: 260,
   },
   marginTopLg: {
     marginTop: 40,

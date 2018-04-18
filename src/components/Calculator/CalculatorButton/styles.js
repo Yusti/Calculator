@@ -2,13 +2,13 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   button: {
-    width: 55,
-    height: 55,
+    height: 50,
     justifyContent: 'center',
     alignItems: 'center',
     margin: 5,
     borderRadius: 5,
     overflow: 'hidden',
+    flex: 1,
   },
   number: {
     backgroundColor: '#dbfaf7',

@@ -1,4 +1,4 @@
-export const SET_INPUT = 'calculator/ButtonsGroup/SET_INPUT';
-export const SET_NEW_INPUT_EXPECTED = 'calculator/ButtonsGroup/SET_NEW_INPUT_EXPECTED';
-export const SET_OPERATION = 'calculator/ButtonsGroup/SET_OPERATION';
 export const SET_RESULT = 'calculator/ButtonsGroup/SET_RESULT';
+export const CHANGE_OPERATION = 'calculator/ButtonsGroup/CHANGE_OPERATION';
+export const CHANGE_INPUT = 'calculator/ButtonsGroup/CHANGE_INPUT';
+export const DELETE_INPUT = 'calculator/ButtonsGroup/DELETE_INPUT';

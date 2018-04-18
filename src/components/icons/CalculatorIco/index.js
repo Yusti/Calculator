@@ -11,14 +11,14 @@ type Props = {
 
 export default function CalculatorIco({ onPress }: Props) {
   return (
-    <View style={styles.icon} width={100} height={100}>
+    <View style={styles.label}>
       <TouchableOpacity onPress={onPress}>
         <FontAwesome
           name="calculator"
           size={60}
-          style={[styles.colorBlue, { padding: 5, paddingRight: 0 }]}
+          style={styles.icon}
         />
-        <Text style={styles.colorBlue}>Calculator</Text>
+        <Text style={styles.copy}>Calculator</Text>
       </TouchableOpacity>
     </View>
   );

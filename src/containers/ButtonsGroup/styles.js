@@ -21,8 +21,9 @@ const styles = StyleSheet.create({
   flex3: {
     flex: 3,
   },
-  btnLg: {
-    width: 120,
+  flexGrow2: {
+    flexGrow: 2,
+    flex: 0,
   },
 });
 
