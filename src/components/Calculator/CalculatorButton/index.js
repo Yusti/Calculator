@@ -7,7 +7,7 @@ import styles from './styles';
 type Props = {
   onPress: Function,
   style: any,
-  title: string | number,
+  title: string,
   theme: 'number' | 'operation' | 'dangerOperation',
 };
 

@@ -30,7 +30,7 @@ export const setResult = () => (dispatch, getState) => {
   dispatch({
     type: SET_RESULT,
     payload: {
-      input: result.toString(),
+      input: `${result}`,
       newInputExpected: true,
       result,
     },

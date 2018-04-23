@@ -32,7 +32,7 @@ function ButtonsGroup({
         numbers.push(<CalculatorButton
           key={j}
           title={j}
-          onPress={() => changeInput(j.toString())}
+          onPress={() => changeInput(`${j}`)}
         />);
       }
       i -= 3;
