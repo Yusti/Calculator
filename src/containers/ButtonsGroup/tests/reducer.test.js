@@ -95,13 +95,13 @@ describe('Calculator reducer', () => {
   });
 
   it('should calculate  2 + 3', async () => {
-    const nextState1 = await applyAction(initialState, changeInput('2'));
-    let nextState2 = await applyAction(nextState1, changeOperation('+'));
-    nextState2 = reducer(nextState2, store.getActions()[1]);
-    const nextState3 = await applyAction(nextState2, changeInput('3'));
-    let nextState4 = await applyAction(nextState3, changeOperation('='));
-    nextState4 = reducer(nextState4, store.getActions()[1]);
+    let nextState = await applyAction(initialState, changeInput('2'));
+    nextState = await applyAction(nextState, changeOperation('+'));
+    nextState = reducer(nextState, store.getActions()[1]);
+    nextState = await applyAction(nextState, changeInput('3'));
+    nextState = await applyAction(nextState, changeOperation('='));
+    nextState = reducer(nextState, store.getActions()[1]);
 
-    return expect(nextState4.calculator.result).toEqual(5);
+    return expect(nextState.calculator.result).toEqual(5);
   });
 });
