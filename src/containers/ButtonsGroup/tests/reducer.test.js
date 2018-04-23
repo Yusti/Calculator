@@ -27,12 +27,16 @@ const currentState = {
     result: 20,
   },
 };
+let store;
+function applyAction(state, action) {
+  store = mockStore(state);
+  store.dispatch(action);
+  return reducer(state, store.getActions()[0]);
+}
 
 describe('Calculator reducer', () => {
   it('should calculate result', async () => {
-    const store = mockStore(currentState);
-    await store.dispatch(setResult());
-    const nextState = reducer(currentState, store.getActions()[0]);
+    const nextState = await applyAction(currentState, setResult());
     return expect(nextState.calculator.result).toEqual(30);
   });
 
@@ -43,16 +47,12 @@ describe('Calculator reducer', () => {
         newInputExpected: true,
       },
     };
-    const store = mockStore(modifiedState);
-    await store.dispatch(changeOperation('-'));
-    const nextState = reducer(modifiedState, store.getActions()[0]);
+    const nextState = await applyAction(modifiedState, changeOperation('-'));
     return expect(nextState.calculator.operation).toEqual('-');
   });
 
   it('should change input when new input does not expected', async () => {
-    const store = mockStore(currentState);
-    await store.dispatch(changeInput('2'));
-    const nextState = reducer(currentState, store.getActions()[0]);
+    const nextState = await applyAction(currentState, changeInput('2'));
     return expect(nextState.calculator.input).toEqual('102');
   });
 
@@ -63,9 +63,7 @@ describe('Calculator reducer', () => {
         newInputExpected: true,
       },
     };
-    const store = mockStore(modifiedState);
-    await store.dispatch(changeInput('2'));
-    const nextState = reducer(modifiedState, store.getActions()[0]);
+    const nextState = await applyAction(modifiedState, changeInput('2'));
     return expect(nextState.calculator.input).toEqual('2');
   });
 
@@ -76,9 +74,7 @@ describe('Calculator reducer', () => {
         input: '0',
       },
     };
-    const store = mockStore(modifiedState);
-    await store.dispatch(changeInput('2'));
-    const nextState = reducer(modifiedState, store.getActions()[0]);
+    const nextState = await applyAction(modifiedState, changeInput('2'));
     return expect(nextState.calculator.input).toEqual('2');
   });
 
@@ -89,37 +85,23 @@ describe('Calculator reducer', () => {
         input: '0',
       },
     };
-    const store = mockStore(modifiedState);
-    await store.dispatch(changeInput('.'));
-    const nextState = reducer(modifiedState, store.getActions()[0]);
+    const nextState = await applyAction(modifiedState, changeInput('.'));
     return expect(nextState.calculator.input).toEqual('0.');
   });
 
   it('should return the initial state on delete operation', async () => {
-    const store = mockStore(currentState);
-    await store.dispatch(deleteInput());
-    const nextState = reducer(currentState, store.getActions()[0]);
+    const nextState = await applyAction(currentState, deleteInput());
     return expect(nextState.calculator).toEqual(initialState.calculator);
   });
 
   it('should calculate  2 + 3', async () => {
-    let store = mockStore(initialState);
-    await store.dispatch(changeInput('2'));
-    const nextState1 = reducer(initialState, store.getActions()[0]);
-
-    store = mockStore(nextState1);
-    await store.dispatch(changeOperation('+'));
-    let nextState2 = reducer(nextState1, store.getActions()[0]);
+    const nextState1 = await applyAction(initialState, changeInput('2'));
+    let nextState2 = await applyAction(nextState1, changeOperation('+'));
     nextState2 = reducer(nextState2, store.getActions()[1]);
-
-    store = mockStore(nextState2);
-    await store.dispatch(changeInput('3'));
-    const nextState3 = reducer(nextState2, store.getActions()[0]);
-
-    store = mockStore(nextState3);
-    await store.dispatch(changeOperation('='));
-    let nextState4 = reducer(nextState3, store.getActions()[0]);
+    const nextState3 = await applyAction(nextState2, changeInput('3'));
+    let nextState4 = await applyAction(nextState3, changeOperation('='));
     nextState4 = reducer(nextState4, store.getActions()[1]);
+
     return expect(nextState4.calculator.result).toEqual(5);
   });
 });
