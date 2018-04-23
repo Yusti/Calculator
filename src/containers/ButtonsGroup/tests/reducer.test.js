@@ -27,11 +27,14 @@ const currentState = {
     result: 20,
   },
 };
-let store;
 function applyAction(state, action) {
-  store = mockStore(state);
+  const store = mockStore(state);
   store.dispatch(action);
-  return reducer(state, store.getActions()[0]);
+  let nextState = state;
+  for (let i = 0; i < store.getActions().length; i += 1) {
+    nextState = reducer(nextState, store.getActions()[i]);
+  }
+  return nextState;
 }
 
 describe('Calculator reducer', () => {
@@ -97,10 +100,8 @@ describe('Calculator reducer', () => {
   it('should calculate  2 + 3', async () => {
     let nextState = await applyAction(initialState, changeInput('2'));
     nextState = await applyAction(nextState, changeOperation('+'));
-    nextState = reducer(nextState, store.getActions()[1]);
     nextState = await applyAction(nextState, changeInput('3'));
     nextState = await applyAction(nextState, changeOperation('='));
-    nextState = reducer(nextState, store.getActions()[1]);
 
     return expect(nextState.calculator.result).toEqual(5);
   });
